@@ -1,10 +1,10 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:todoey/model/tasks_data.dart';
 import 'package:todoey/widgets/task_list.dart';
 import 'add_task_screen.dart';
+import 'package:provider/provider.dart';
 
 class TasksScreen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +12,10 @@ class TasksScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.purple.shade200,
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (context) =>  AddTaskScreen());
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => AddTaskScreen(),
+          );
         },
         child: Icon(Icons.add),
       ),
@@ -46,7 +49,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(
                     color: Colors.purple.shade600,
                     fontSize: 12.0,
@@ -58,11 +61,12 @@ class TasksScreen extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.purple.shade50,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0),
-                  ),),
+                color: Colors.purple.shade50,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40.0),
+                  topRight: Radius.circular(40.0),
+                ),
+              ),
               child: TasksList(),
             ),
           ),
@@ -71,7 +75,3 @@ class TasksScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
